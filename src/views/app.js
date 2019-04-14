@@ -1,19 +1,17 @@
 import React from 'react';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux'
 import counter from '../reducers/counter'
-import { logMiddleware } from '../middlewares/log';
 import MyCounter from './counter';
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+import logMiddleware from '../middlewares/log';
+import analyticsMiddleware from '../middlewares/analytics'
 
 const store = createStore(
   counter,
   {},
-  composeEnhancers(
-    applyMiddleware(
-      logMiddleware
-    )
+  applyMiddleware(
+    logMiddleware,
+    analyticsMiddleware
   )
 );
 

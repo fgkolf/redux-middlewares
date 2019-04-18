@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux'
+import thunk from 'redux-thunk';
 import movie from '../reducers/movie'
 import movies from '../reducers/movies'
 import MovieList from './movieList';
@@ -18,7 +19,8 @@ const store = createStore(
   {},
   applyMiddleware(
     logMiddleware,
-    analyticsMiddleware
+    analyticsMiddleware,
+    thunk
   )
 );
 

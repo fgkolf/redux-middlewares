@@ -16,7 +16,7 @@ body {
 .movie {
     width: 60%;
     height: 100%;
-    border: solid;
+    border: solid 1px;
     border-color: whitesmoke;
     margin: 1%;
     padding: 1%;
@@ -63,4 +63,9 @@ li button:hover {
 
 .favorite {
     color: yellow;
+}
+
+.loading {
+    margin: 0 auto;
+    align-self: center;
 }

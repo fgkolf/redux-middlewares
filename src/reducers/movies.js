@@ -1,4 +1,8 @@
-const initialState = [{ name: 'movie1' }, { name: 'movie2' }, { name: 'movie3' }]
+const initialState = [
+  { name: 'The Matrix' },
+  { name: 'The Big Lebowski' },
+  { name: 'Synecdoche, New York' }
+  ]
 
 const movies = (state = initialState, action) => {
   switch (action.type) {

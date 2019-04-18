@@ -1,6 +1,6 @@
 import { TOGGLE_FAVORITE, SET_MOVIE } from '../actions/actions'
 
-const movie = (state = {}, action) => {
+const movie = (state = null, action) => {
   switch (action.type) {
     case SET_MOVIE: {
       return action.payload.movie;

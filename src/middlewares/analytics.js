@@ -3,7 +3,7 @@ import { TOGGLE_FAVORITE } from '../actions/actions'
 const whitelist = [TOGGLE_FAVORITE];
 
 const constructGaAction = ({ type, payload }, state) => (
- `${type} value ${state.counter}`
+ `${state.movie.favorite ? 'unfavorite' : 'favorite'} ${state.movie.name}`
 )
 
 const analyticsMiddleware = store => next => action => {

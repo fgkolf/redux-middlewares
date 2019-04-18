@@ -18,13 +18,15 @@ export const setIsFetchingAction = value => ({
 });
 
 export const requestMovieAction = id => {
-  return function(dispatch) {
+  return async function(dispatch) {
     dispatch(setIsFetchingAction(true));
-    return fetch(`http://localhost:3001/movies/${id}`)
-    .then(data => data.json())
-    .then(movie => {
+    try {
+      const response = await fetch(`http://localhost:3001/movies/${id}`)
+      const movie = await response.json();
       dispatch(setMovieAction(movie));
-      dispatch(setIsFetchingAction(false));
-    })
+    } catch (error) {
+      // no error handling
+    }
+    dispatch(setIsFetchingAction(false));
   };
 };

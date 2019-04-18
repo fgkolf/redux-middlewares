@@ -1,13 +1,20 @@
 import React from 'react';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux'
-import counter from '../reducers/counter'
-import MyCounter from './counter';
+import movie from '../reducers/movie'
+import movies from '../reducers/movies'
+import MovieList from './movieList';
+import Movie from './movie';
 import logMiddleware from '../middlewares/log';
 import analyticsMiddleware from '../middlewares/analytics'
 
+const rootReducer =  combineReducers({
+  movie,
+  movies
+})
+
 const store = createStore(
-  counter,
+  rootReducer,
   {},
   applyMiddleware(
     logMiddleware,
@@ -17,7 +24,10 @@ const store = createStore(
 
 const App = () => (
   <Provider store={store}>
-    <MyCounter />
+    <div className="main">
+      <MovieList />
+      <Movie />
+    </div>
   </Provider>
 )
 

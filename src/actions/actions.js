@@ -1,15 +1,18 @@
-export const INCREMENT = 'INCREMENT';
-export const DECREMENT = 'DECREMENT';
-export const RESET = 'RESET';
+export const REQUEST_MOVIE = 'REQUEST_MOVIE';
+export const SET_MOVIE = 'SET_MOVIE';
+export const TOGGLE_FAVORITE = 'TOGGLE_FAVORITE';
 
-export const incrementAction = () => ({
-  type: INCREMENT
+export const requestMovieAction = id => ({
+  type: REQUEST_MOVIE,
+  payload: id
 });
 
-export const decrementAction = () => ({
-  type: DECREMENT
+export const setMovieAction = movie => ({
+  type: SET_MOVIE,
+  payload: movie
 });
 
-export const resetAction = () => ({
-  type: RESET
+export const toggleFavoriteAction = id => ({
+  type: TOGGLE_FAVORITE,
+  payload: id
 });

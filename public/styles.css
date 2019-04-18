@@ -1,0 +1,66 @@
+body {
+    background-color: #404040;
+    color: whitesmoke;
+}
+
+.main {
+    width: 100%;
+    height: 100%;
+    display: inline-flex;
+}
+
+.movie-list {
+    width: 40%;
+}
+
+.movie {
+    width: 60%;
+    height: 100%;
+    border: solid;
+    border-color: whitesmoke;
+    margin: 1%;
+    padding: 1%;
+}
+
+h2 {
+    margin: 1%;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li button {
+    border-radius: 5px;
+    text-decoration: none;
+    background: #656565;
+    display: block;
+    width: 100%;
+    height: 50px;
+    padding: 1%;
+    margin: 1%;
+    text-align: left;
+    color: whitesmoke;
+}
+
+li button:hover {
+    background: #808080;
+}
+
+.star {
+    outline:none;
+    border: none;
+    background-color: #404040;
+    font-size: 30px
+}
+
+.favorite {
+    color: yellow;
+}

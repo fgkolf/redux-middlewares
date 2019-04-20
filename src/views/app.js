@@ -1,21 +1,21 @@
 import React from 'react';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux'
-import createSagaMiddleware from 'redux-saga'
+import { createEpicMiddleware } from 'redux-observable';
 import movie from '../reducers/movie'
 import movies from '../reducers/movies'
 import MovieList from './movieList';
 import Movie from './movie';
 import logMiddleware from '../middlewares/log';
 import analyticsMiddleware from '../middlewares/analytics'
-import mySaga from '../middlewares/saga'
+import mySaga from '../middlewares/epic'
 
 const rootReducer =  combineReducers({
   movie,
   movies
 })
 
-const sagaMiddleware = createSagaMiddleware();
+const epicMiddleware = createEpicMiddleware();
 
 const store = createStore(
   rootReducer,
@@ -23,11 +23,11 @@ const store = createStore(
   applyMiddleware(
     logMiddleware,
     analyticsMiddleware,
-    sagaMiddleware
+    epicMiddleware
   )
 );
 
-sagaMiddleware.run(mySaga)
+epicMiddleware.run(mySaga)
 
 const App = () => (
   <Provider store={store}>

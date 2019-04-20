@@ -8,7 +8,7 @@ import MovieList from './movieList';
 import Movie from './movie';
 import logMiddleware from '../middlewares/log';
 import analyticsMiddleware from '../middlewares/analytics'
-import mySaga from '../middlewares/epic'
+import myEpic from '../middlewares/epic'
 
 const rootReducer =  combineReducers({
   movie,
@@ -27,7 +27,7 @@ const store = createStore(
   )
 );
 
-epicMiddleware.run(mySaga)
+epicMiddleware.run(myEpic)
 
 const App = () => (
   <Provider store={store}>

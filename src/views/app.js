@@ -30,8 +30,13 @@ sagaMiddleware.run(mySaga)
 const App = () => (
   <Provider store={store}>
     <Router history={hashHistory}>
-      <Route path="/" component={Page1} />
-      <Route path="/page2" component={Page2} />
+      <Route path="/" component={() => (
+        <div>
+        <Page1 bank="alpha" />
+        <Page1 bank="nbg" />
+        <Page1 bank="pireaus" />
+        </div>)} />
+      <Route path="/page2/:bank" component={Page2} />
     </Router>
   </Provider>
 )

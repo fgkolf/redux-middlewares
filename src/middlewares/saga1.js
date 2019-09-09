@@ -1,31 +1,44 @@
-import { call, delay, put, take, takeLatest } from 'redux-saga/effects'
-import { CONTINUE_PROCESS, OPEN_WINDOW } from '../actions/actions'
+import { call, delay, put, take, takeEvery, race } from 'redux-saga/effects'
+import { CONTINUE_PROCESS, OPEN_WINDOW, setIsFetchingAction } from '../actions/actions'
 
 function* openWindow(action) {
-
+  let newWindow;
+  const {openWindowCallback, bank} = action.payload;
   try {
-    const {openWindowCallback} = action.payload;
+    yield put(setIsFetchingAction(bank, true))
     const paramBefore = 'theBefore';
     yield delay(2000);
-    const newWindow = yield call(openWindowCallback, 'http://localhost:3000/#/page2')
-    const continueAction = yield take('fontas');
-    console.log('ARRIVED AT THE POINT', paramBefore, continueAction.payload)
-    newWindow.close();
+    newWindow = yield call(openWindowCallback, `http://localhost:3000/#/page2/${bank}`)
+    const continueAction = yield take(`${bank}_continue`);
+    console.log(`ARRIVED AT THE POINT for ${bank}`, paramBefore, continueAction.payload)
   } catch (e) {
     console.log(e)
+  } finally {
+    if (newWindow) {
+      newWindow.close()
+      yield put(setIsFetchingAction(bank, false))
+    }
   }
 }
 
-function* continueProcess() {
-  const paramAfter = 'theAfter';
+function* f (action) {
+  const { bank } = action.payload;
+  yield race({
+    wanted: call(openWindow, action),
+    closed: take(`${bank}_closed`)
+  })
+}
+
+function* continueProcess(action) {
+  const { bank, data } = action.payload
   yield delay(2000);
-  yield put({ type: 'fontas', payload: paramAfter })
+  yield put({ type: `${bank}_continue`, payload: data })
 }
 
 function* mySaga() {
   yield* [
-    takeLatest(OPEN_WINDOW, openWindow),
-    takeLatest(CONTINUE_PROCESS, continueProcess)
+    takeEvery(OPEN_WINDOW, f),
+    takeEvery(CONTINUE_PROCESS, continueProcess)
   ];
 }
 export default mySaga;

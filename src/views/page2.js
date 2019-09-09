@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { continueProcessAction } from '../actions/actions'
-import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 
 class Page2 extends Component {
 
   componentDidMount () {
-    window.continueProcess('coming from popup');
+    const { bank } = this.props.params
+    window.continueProcess(bank, 'coming from popup');
   }
 
   render() {
@@ -13,10 +13,4 @@ class Page2 extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  continueProcess: () => {
-    dispatch(continueProcessAction());
-  }
-});
-
-export default connect(null, mapDispatchToProps)(Page2);
+export default withRouter(Page2)

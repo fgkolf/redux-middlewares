@@ -20,17 +20,17 @@ export const toggleFavoriteAction = id => ({
   payload: id
 });
 
-export const setIsFetchingAction = value => ({
+export const setIsFetchingAction = (bank, value) => ({
   type: SET_IS_FETCHING,
-  payload: value
+  payload: { value, bank }
 });
 
-export const openWindowAction = (openWindowCallback) => ({
+export const openWindowAction = (openWindowCallback, bank) => ({
     type: OPEN_WINDOW,
-    payload: { openWindowCallback }
+    payload: { openWindowCallback, bank }
   })
 
-export const continueProcessAction = (data) => ({
+export const continueProcessAction = (bank, data) => ({
   type: CONTINUE_PROCESS,
-  payload: data
+  payload: {data, bank}
 })

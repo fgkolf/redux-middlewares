@@ -11,7 +11,8 @@ const initialState = {
 const movie = (state = initialState, action) => {
   switch (action.type) {
     case SET_IS_FETCHING: {
-      return { ...state, isFetching: action.payload }
+      const { bank, value } = action.payload;
+      return { ...state, [bank]: { isFetching: value } }
     }
     case SET_MOVIE: {
       return action.payload;

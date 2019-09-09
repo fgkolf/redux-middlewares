@@ -10,14 +10,17 @@ function* openWindow(action) {
     yield delay(2000);
     newWindow = yield call(openWindowCallback, `http://localhost:3000/#/page2/${bank}`)
     const continueAction = yield take(`${bank}_continue`);
+    if (bank !== 'alpha') {
+      yield delay(2000);
+    }
     console.log(`ARRIVED AT THE POINT for ${bank}`, paramBefore, continueAction.payload)
   } catch (e) {
     console.log(e)
   } finally {
-    if (newWindow) {
-      newWindow.close()
       yield put(setIsFetchingAction(bank, false))
-    }
+  }
+  if (newWindow) {
+    newWindow.close()
   }
 }
 

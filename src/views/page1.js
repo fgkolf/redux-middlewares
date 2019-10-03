@@ -9,10 +9,12 @@ class Page1 extends Component {
   }
 
   openWindowCallback(url) {
-    this.newWindow = window.open(url, this.props.bank, 'width=600,height=400,left=200,top=200')
-    this.newWindow.continueProcess = this.props.continueProcess;
-    this.newWindow.onbeforeunload = this.props.terminateProcess;
-    return this.newWindow;
+    const newWindow = window.open('', '_blank', 'width=600,height=400,left=200,top=200')
+    newWindow.location.replace(url);
+    newWindow.continueProcess = this.props.continueProcess;
+    newWindow.onbeforeunload = this.props.terminateProcess;
+    console.log('HERE IS THE NEW WINDOW', newWindow);
+    return newWindow;
   }
 
   render()

@@ -7,12 +7,11 @@ function* openWindow(action) {
   try {
     yield put(setIsFetchingAction(bank, true))
     const paramBefore = 'theBefore';
-    yield delay(2000);
-    newWindow = yield call(openWindowCallback, `http://localhost:3000/#/page2/${bank}`)
+    newWindow = openWindowCallback('http://google.com');
+    console.log('ONE STEP AT A TIME with window', newWindow);
+    // newWindow.location.replace('http://localhost:3000/#/page2/alpha');
+    newWindow.location.replace('http://facebook.com');
     const continueAction = yield take(`${bank}_continue`);
-    if (bank !== 'alpha') {
-      yield delay(2000);
-    }
     console.log(`ARRIVED AT THE POINT for ${bank}`, paramBefore, continueAction.payload)
   } catch (e) {
     console.log(e)

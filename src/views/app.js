@@ -8,7 +8,7 @@ import MovieList from './movieList';
 import Movie from './movie';
 import logMiddleware from '../middlewares/log';
 import analyticsMiddleware from '../middlewares/analytics'
-import mySaga from '../middlewares/saga'
+import rootSaga from '../middlewares/watcher'
 
 const rootReducer =  combineReducers({
   movie,
@@ -27,7 +27,7 @@ const store = createStore(
   )
 );
 
-sagaMiddleware.run(mySaga)
+sagaMiddleware.run(rootSaga)
 
 const App = () => (
   <Provider store={store}>

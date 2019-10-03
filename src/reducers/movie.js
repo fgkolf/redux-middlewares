@@ -14,7 +14,7 @@ const movie = (state = initialState, action) => {
       return { ...state, isFetching: action.payload }
     }
     case SET_MOVIE: {
-      return action.payload;
+      return { ...state, ...action.payload }
     }
     case TOGGLE_FAVORITE: {
       return { ...state, favorite: !state.favorite }

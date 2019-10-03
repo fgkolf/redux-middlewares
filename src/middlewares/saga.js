@@ -1,5 +1,5 @@
-import { put, call, takeLatest } from 'redux-saga/effects';
-import { REQUEST_MOVIE, setIsFetchingAction, setMovieAction } from '../actions/actions'
+import { put, call } from 'redux-saga/effects';
+import { setMovieAction } from '../actions/actions'
 
 const apiRequest = (url) => {
   return fetch(url)
@@ -9,19 +9,13 @@ const apiRequest = (url) => {
 
 function* fetchMovie(action) {
   try {
-    yield put(setIsFetchingAction(true));
     const movie = yield call(apiRequest, `http://localhost:3001/movies/${action.payload}`);
     yield put(setMovieAction(movie));
   } catch (e) {
     // no error handling
+    return e;
   }
-  yield put(setIsFetchingAction(false));
+  return null;
 }
 
-function* mySaga() {
-  yield* [
-    takeLatest(REQUEST_MOVIE, fetchMovie)
-    ];
-}
-
-export default mySaga;
+export default fetchMovie;
